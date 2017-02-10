@@ -70,11 +70,11 @@ func init() {
 }
 
 func parse(s string) (*template.Template, error) {
-	return template.New("").Funcs(sprig.TxtFuncMap()).Funcs(customFuncMap()).Parse(s)
+	return template.New("").Option("missingkey=error").Funcs(sprig.TxtFuncMap()).Funcs(customFuncMap()).Parse(s)
 }
 
 func parseFiles(files ...string) (*template.Template, error) {
-	return template.New(filepath.Base(files[0])).Funcs(sprig.TxtFuncMap()).Funcs(customFuncMap()).ParseFiles(files...)
+	return template.New(filepath.Base(files[0])).Option("missingkey=error").Funcs(sprig.TxtFuncMap()).Funcs(customFuncMap()).ParseFiles(files...)
 }
 
 func readEnv() (env map[string]string) {
